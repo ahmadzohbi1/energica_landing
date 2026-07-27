@@ -1,0 +1,316 @@
+/* Dark theme override */
+.theme {
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  --brand: #7c3aed;
+  --brand-deep: #5b21b6;
+  --brand-soft: rgba(124,58,237,0.16);
+  --accent: #c084fc;
+  --accent-soft: rgba(192,132,252,0.16);
+  --bg: #0a0817;
+  --surface: #110d24;
+  --fg: #f0ecff;
+  --fg-mute: #9b96b5;
+  --line: #221a3d;
+  --line-strong: #342a55;
+}
+.theme :global(h1), .theme :global(h2), .theme :global(h3), .theme :global(h4) { color: var(--fg); }
+.theme :global(p) { color: var(--fg-mute); }
+
+/* Dark theme also restyles the shared Nav/Footer — those use plain global
+   classnames (no CSS module), so they're targeted via :global here, scoped
+   under .theme so they only apply while this page is mounted. */
+.theme :global(.nav) { background: rgba(10,8,23,0.85); border-bottom-color: var(--line); }
+.theme :global(.nav-logo) { color: white; }
+.theme :global(.nav-logo) :global(small) { color: var(--fg-mute); }
+.theme :global(.nav-links) :global(a), .theme :global(.nav-links) :global(button) { color: var(--fg); }
+.theme :global(.nav-links) :global(a):hover, .theme :global(.nav-links) :global(button):hover { background: var(--brand-soft); }
+.theme :global(.mega) { background: var(--surface); border-color: var(--line); color: var(--fg); }
+.theme :global(.mega-item):hover { background: #181232; }
+.theme :global(.mega-item-title) { color: var(--fg); }
+.theme :global(.mega-ico) { background: var(--surface); border-color: var(--line); }
+.theme :global(.mega-foot) { border-top-color: var(--line); color: var(--fg-mute); }
+.theme :global(.mega-foot) strong { color: var(--fg); }
+.theme :global(.mobile-drawer) { background: var(--bg); color: var(--fg); }
+.theme :global(.mobile-drawer) :global(a) { color: var(--fg); border-color: var(--line); }
+.theme :global(.btn-ghost) { background: transparent; color: var(--fg); border-color: var(--line-strong); }
+.theme :global(.btn-ghost):hover { color: var(--accent); border-color: var(--accent); }
+.theme :global(.footer) { background: var(--surface); border-top-color: var(--line); }
+.theme :global(.footer) :global(a) { color: var(--fg); }
+.theme :global(.footer) h5 { color: var(--fg-mute); }
+.theme :global(.footer-bottom) { border-top-color: var(--line); color: var(--fg-mute); }
+.theme :global(.footer-bottom) + * :global(a) { color: var(--fg); }
+.theme :global(.nav-mobile-toggle) { background: var(--surface); border-color: var(--line); }
+.theme :global(.nav-mobile-toggle) svg { stroke: var(--fg); }
+.theme :global(.nav-cta) { background: var(--brand); }
+.theme :global(.nav-cta):hover { background: var(--brand-deep); }
+.theme :global(.logo-mark) { background: var(--brand); }
+.theme :global(.logo-mark)::after { background: var(--accent); }
+
+/* HERO */
+.hero {
+  position: relative;
+  padding: clamp(80px, 10vh, 140px) 0 clamp(100px, 12vh, 160px);
+  overflow: hidden;
+}
+.heroBg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(124,58,237,0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(192,132,252,0.15) 0%, transparent 50%);
+}
+.heroBg .grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+.heroGrid {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+@media (max-width: 900px) { .heroGrid { grid-template-columns: 1fr; } }
+.hero h1 {
+  font-size: clamp(44px, 6vw, 84px);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+.hero h1 .glow {
+  background: linear-gradient(135deg, #c084fc 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.heroSub { font-size: 18px; max-width: 540px; margin-top: 28px; color: rgba(240,236,255,0.7); }
+.heroRow { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
+.heroTag {
+  display: inline-flex; gap: 8px; align-items: center;
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+.heroTag::before { content: ""; width: 16px; height: 1px; background: var(--accent); }
+
+/* Hybrid diagram visualization */
+.hybridVis {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at center, rgba(124,58,237,0.25) 0%, transparent 60%),
+    var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.hybridVis svg { width: 100%; height: 100%; }
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+@keyframes flow {
+  from { stroke-dashoffset: 24; }
+  to { stroke-dashoffset: 0; }
+}
+.flowLine { stroke-dasharray: 4 8; animation: flow 1.6s linear infinite; }
+.pulseDot { animation: pulse 1.4s ease-in-out infinite; }
+
+/* HOW IT WORKS — flow diagram */
+.how { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.flow {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr 60px 1fr;
+  align-items: center;
+  margin-top: 56px;
+  gap: 0;
+}
+@media (max-width: 900px) {
+  .flow { grid-template-columns: 1fr; }
+  .flow .arrow { transform: rotate(90deg); margin: 12px auto; }
+}
+.node {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 200ms, transform 200ms;
+}
+.node:hover { border-color: var(--brand); transform: translateY(-2px); }
+.node .num {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.16em;
+  margin-bottom: 10px;
+}
+.node h3 { font-size: 20px; margin-bottom: 8px; }
+.node p { font-size: 14px; }
+.node .ico {
+  width: 56px; height: 56px;
+  border-radius: 12px;
+  background: var(--brand-soft);
+  display: grid; place-items: center;
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+.node .ico svg { width: 28px; height: 28px; }
+.arrow { display: grid; place-items: center; color: var(--accent); height: 100%; }
+.arrow svg { width: 28px; height: 28px; }
+
+/* PRICING */
+.pricingWrap {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.2) 0%, transparent 60%),
+    var(--bg);
+  padding: var(--space-7) 0;
+  position: relative;
+  overflow: hidden;
+}
+.pricingCard {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(40px, 5vw, 60px);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.pricingCard::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+}
+@media (max-width: 900px) { .pricingCard { grid-template-columns: 1fr; padding: 32px; } }
+.pricingCard h2 { font-size: clamp(32px, 4vw, 48px); }
+.meter {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+}
+.meter .label {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+.meter .big {
+  font-family: "Geist", sans-serif;
+  font-size: 64px;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: white;
+  margin: 12px 0 4px;
+  line-height: 1;
+}
+.meter .big .unit {
+  font-family: "Geist Mono", monospace;
+  font-size: 18px;
+  color: var(--accent);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.meter .sub { font-size: 13.5px; color: var(--fg-mute); }
+.meterBar {
+  margin-top: 24px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  overflow: hidden;
+  position: relative;
+}
+.meterBar::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, #7c3aed 0%, #c084fc 100%);
+  width: 72%;
+  border-radius: 999px;
+  animation: fill 2s ease-out;
+}
+@keyframes fill { from { width: 0%; } to { width: 72%; } }
+.meterRow {
+  display: flex; justify-content: space-between;
+  margin-top: 10px;
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  color: var(--fg-mute);
+  text-transform: uppercase; letter-spacing: 0.12em;
+}
+.priceFeatures { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 12px; }
+.priceFeatures li { display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; color: var(--fg); }
+.priceFeatures li::before {
+  content: "✓";
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--brand-soft);
+  color: var(--accent);
+  display: grid; place-items: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+/* INDUSTRIES */
+.industries {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+@media (max-width: 900px) { .industries { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .industries { grid-template-columns: 1fr; } }
+.ind { background: var(--surface); padding: 32px; transition: background 200ms; }
+.ind:hover { background: #14102a; }
+.ind .ico { width: 36px; height: 36px; color: var(--accent); margin-bottom: 16px; }
+.ind h4 { font-size: 17px; margin-bottom: 8px; }
+.ind p { font-size: 13.5px; }
+.ind .stat {
+  margin-top: 16px;
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  color: var(--brand);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* CTA */
+.genCta {
+  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+  border-radius: 20px;
+  padding: clamp(48px, 6vw, 80px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.genCta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at center, black, transparent 70%);
+}
+.genCta h2 { color: white; max-width: 720px; margin: 0 auto; font-size: clamp(32px, 4vw, 48px); position: relative; }
+.genCta p { color: rgba(255,255,255,0.85); margin: 20px auto 0; max-width: 600px; position: relative; }
+.genCta .btnRow { position: relative; margin-top: 32px; display: inline-flex; gap: 12px; flex-wrap: wrap; }

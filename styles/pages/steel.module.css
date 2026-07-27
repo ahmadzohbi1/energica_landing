@@ -1,0 +1,258 @@
+.theme {
+  background: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  --brand: #1f3a5f;
+  --brand-deep: #122544;
+  --brand-soft: rgba(31,58,95,0.07);
+  --accent: #6b7785;
+  --accent-soft: rgba(107,119,133,0.10);
+  --bg: #f1f3f5;
+  --surface: #ffffff;
+  --fg: #14202e;
+  --fg-mute: #4d5868;
+  --line: #dde1e6;
+  --line-strong: #b8bfc8;
+}
+
+/* HERO — industrial split */
+.hero {
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.hero h1 { line-height: 1.0; }
+.heroInner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  min-height: 600px;
+  align-items: stretch;
+}
+@media (max-width: 900px) { .heroInner { grid-template-columns: 1fr; } }
+.heroLeft {
+  padding: clamp(60px, 10vh, 120px) 0 clamp(60px, 8vh, 100px) clamp(20px, 4vw, 48px);
+  display: flex; flex-direction: column; justify-content: center;
+  max-width: 720px;
+  margin-left: auto;
+  width: 100%;
+}
+.heroLeft :global(.container) { padding: 0; max-width: 100%; }
+.heroRight {
+  background: var(--brand);
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+}
+.heroRight svg { width: 100%; height: 100%; display: block; }
+
+.blueprintGrid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.blueprintGrid::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 200px 200px;
+}
+
+.heroSpec {
+  display: flex; gap: 32px; flex-wrap: wrap;
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.heroSpec > div {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  color: var(--fg-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+}
+.heroSpec > div strong {
+  display: block;
+  font-family: "Geist", sans-serif;
+  font-size: 18px;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.numMark {
+  color: var(--accent);
+  font-family: "Geist Mono", monospace;
+  font-weight: 400;
+  font-size: 0.45em;
+  vertical-align: top;
+  margin-right: 14px;
+  letter-spacing: 0;
+}
+
+/* Services as info table */
+.svcTable {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.svcRow {
+  display: grid;
+  grid-template-columns: 100px 1.5fr 2fr 80px;
+  align-items: center;
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--line);
+  transition: background 180ms;
+  cursor: default;
+}
+.svcRow:last-child { border-bottom: 0; }
+.svcRow:hover { background: var(--brand-soft); }
+.svcRow .num {
+  font-family: "Geist Mono", monospace;
+  font-size: 12px;
+  color: var(--fg-mute);
+  letter-spacing: 0.16em;
+}
+.svcRow .name { font-weight: 600; font-size: 18px; letter-spacing: -0.01em; }
+.svcRow .desc { font-size: 14px; color: var(--fg-mute); }
+.svcRow .badge {
+  font-family: "Geist Mono", monospace;
+  font-size: 10.5px;
+  background: var(--brand);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+@media (max-width: 800px) {
+  .svcRow { grid-template-columns: 1fr; gap: 6px; padding: 20px; }
+  .svcRow .badge { justify-self: start; }
+}
+
+/* Projects — Architect-style */
+.projGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+@media (max-width: 800px) { .projGrid { grid-template-columns: 1fr; } }
+.projCard {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 220ms, border-color 220ms;
+}
+.projCard:hover { transform: translateY(-4px); border-color: var(--brand); }
+.projVis {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--brand);
+  overflow: hidden;
+}
+.projVis svg { width: 100%; height: 100%; }
+.projInfo { padding: 24px; }
+.projInfo :global(.row) { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.projInfo h4 { font-size: 19px; }
+.projInfo .loc {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em;
+  color: var(--fg-mute);
+  margin-top: 4px;
+}
+.projInfo .tonnes {
+  font-family: "Geist Mono", monospace;
+  font-size: 13px;
+  color: var(--brand);
+  font-weight: 500;
+}
+.projInfo p { font-size: 14px; margin-top: 12px; }
+
+/* Materials & certs */
+.certs {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.certsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+  align-items: start;
+}
+@media (max-width: 900px) { .certsGrid { grid-template-columns: 1fr; gap: 40px; } }
+.matTable { border: 1px solid var(--line); border-radius: 12px; }
+.matRow {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.matRow:last-child { border-bottom: 0; }
+.matRow .n { font-weight: 500; font-size: 14.5px; }
+.matRow .g { font-size: 13px; color: var(--fg-mute); }
+.matRow .v {
+  font-family: "Geist Mono", monospace;
+  font-size: 13px;
+  color: var(--brand);
+  text-align: right;
+}
+.certGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cert { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+.cert .id {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  color: var(--brand);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.cert .t { font-size: 14.5px; font-weight: 500; margin-top: 4px; }
+.cert .d { font-size: 12.5px; color: var(--fg-mute); margin-top: 2px; }
+
+/* Contact CTA */
+.contactStrip {
+  background: var(--brand);
+  color: white;
+  padding: var(--space-6) 0;
+  position: relative;
+  overflow: hidden;
+}
+.contactStrip :global(.container) {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+}
+@media (max-width: 800px) { .contactStrip :global(.container) { grid-template-columns: 1fr; } }
+.contactStrip h2 { color: white; max-width: 540px; }
+.contactStrip p { color: rgba(255,255,255,0.7); max-width: 540px; margin-top: 16px; }
+.contactStrip .blueprintGrid { opacity: 0.5; }
+.contactCard {
+  background: var(--brand-deep);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 28px;
+  position: relative;
+  z-index: 1;
+}
+.contactCard .lab {
+  font-family: "Geist Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+.contactCard .val { font-size: 17px; font-weight: 500; margin-bottom: 18px; }
+.contactCard :global(.btn) { width: 100%; justify-content: center; background: var(--accent); color: white; }
